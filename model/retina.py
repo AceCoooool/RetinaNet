@@ -83,28 +83,25 @@ class RetinaNet(nn.Module):
         return boxes
 
 
-def get_retina_net(name, dataset, pretrained=False,
-                   root=os.path.expanduser('~/.torch/models'), **kwargs):
+def get_retina_net(pretrained=None, **kwargs):
     net = RetinaNet(**kwargs)
     if pretrained:
-        from model.model_zoo import get_model_file
-        full_name = '_'.join(('retina', name, dataset))
-        state = torch.load(get_model_file(full_name, root=root))
+        state = torch.load(pretrained)
         net.load_state_dict(state['model'] if 'model' in state else state)
     return net
 
 
-def retina_resnet50_v1b_coco(pretrained=False, pretrained_base=True, **kwargs):
+def retina_resnet50_v1b_coco(pretrained=None, pretrained_base=None, **kwargs):
     from data.datasets import COCODataset
     classes = COCODataset.CLASSES
-    pretrained_base = False if pretrained else pretrained_base
+    pretrained_base = None if pretrained is None else pretrained_base
     features = FPNFeatureExpander(
         network='resnet50_v1b', outputs=[[5, 3], [6, 5], [7, 2]],
         channels=[512, 1024, 2048], num_filters=[256, 256, 256],
         use_1x1=True, use_upsample=True, use_elewadd=True, use_bias=True,
         pretrained=pretrained_base, top_blocks=LastLevelP6P7(2048, 256))
     return get_retina_net(
-        'resnet50_v1b', dataset='coco', pretrained=pretrained, features=features,
+        pretrained=pretrained, features=features,
         classes=classes, anchor_sizes=(32, 64, 128, 256, 512), aspect_ratios=(0.5, 1.0, 2.0),
         anchor_strides=(8, 16, 32, 64, 128), straddle_thresh=-1, octave=2.0, scales_per_octave=3,
         in_channels=256, num_convs=4, prior_prob=0.01, pre_nms_thresh=0.05, pre_nms_top_n=1000,
@@ -113,8 +110,12 @@ def retina_resnet50_v1b_coco(pretrained=False, pretrained_base=True, **kwargs):
 
 
 if __name__ == '__main__':
-    net = retina_resnet50_v1b_coco(pretrained=True)
-    net.eval()
+    a = ''
+    if a:
+        print('a')
+
+    # net = retina_resnet50_v1b_coco(pretrained=True)
+    # net.eval()
     # params = net.state_dict()
     # all_keys = params.keys()
     # all_keys = [k for k in all_keys if not k.endswith('num_batches_tracked')]

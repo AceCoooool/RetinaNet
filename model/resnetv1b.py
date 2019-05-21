@@ -233,11 +233,10 @@ class ResNetV1b(nn.Module):
 # -----------------------------------------------------------------------------
 # Constructor
 # -----------------------------------------------------------------------------
-def resnet50_v1b(pretrained=False, root=os.path.expanduser('~/.torch/models'), **kwargs):
+def resnet50_v1b(pretrained=None, **kwargs):
     model = ResNetV1b(BottleneckV1b, [3, 4, 6, 3], **kwargs)
     if pretrained:
-        from model.model_zoo import get_model_file
-        model.load_state_dict(torch.load(get_model_file('resnet%d_v%db' % (50, 1), root=root)))
+        model.load_state_dict(torch.load(pretrained))
         from data.datasets.imagenet import ImageNetAttr
         attrib = ImageNetAttr()
         model.synset = attrib.synset
@@ -246,12 +245,11 @@ def resnet50_v1b(pretrained=False, root=os.path.expanduser('~/.torch/models'), *
     return model
 
 
-def resnet101_v1b(pretrained=False, root=os.path.expanduser('~/.torch/models'), **kwargs):
+def resnet101_v1b(pretrained=None, **kwargs):
     model = ResNetV1b(BottleneckV1b, [3, 4, 23, 3], **kwargs)
     if pretrained:
         import torch
-        from model.model_zoo import get_model_file
-        model.load_state_dict(torch.load(get_model_file('resnet%d_v%db' % (101, 1), root=root)))
+        model.load_state_dict(torch.load(pretrained))
         from data.datasets.imagenet import ImageNetAttr
         attrib = ImageNetAttr()
         model.synset = attrib.synset
@@ -260,7 +258,7 @@ def resnet101_v1b(pretrained=False, root=os.path.expanduser('~/.torch/models'), 
     return model
 
 
-def resnet50_v1s(pretrained=False, root=os.path.expanduser('~/.torch/models'), **kwargs):
+def resnet50_v1s(pretrained=None, **kwargs):
     """Constructs a ResNetV1s-50 model.
 
     Parameters
@@ -278,8 +276,7 @@ def resnet50_v1s(pretrained=False, root=os.path.expanduser('~/.torch/models'), *
     model = ResNetV1b(BottleneckV1b, [3, 4, 6, 3], deep_stem=True, stem_width=64, **kwargs)
     if pretrained:
         import torch
-        from model.model_zoo import get_model_file
-        model.load_state_dict(torch.load(get_model_file('resnet%d_v%ds' % (50, 1), root=root)))
+        model.load_state_dict(torch.load(pretrained))
         from data.datasets.imagenet import ImageNetAttr
         attrib = ImageNetAttr()
         model.synset = attrib.synset

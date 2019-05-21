@@ -1,5 +1,6 @@
 import cv2
 import data.transforms.functional_cv as vf
+import data.transforms.pair_cv as T
 
 
 def transform_test(img, min_image_size, mean, std):
@@ -16,4 +17,10 @@ def load_test(filename, min_image_size=800, mean=(102.9801, 115.9465, 122.7717),
     return transform_test(img, min_image_size, mean, std)
 
 
-
+def transforms_eval(min_size, max_size, mean=(102.9801, 115.9465, 122.7717),
+                    std=(1.0, 1.0, 1.0)):
+    return T.Compose([
+        T.Resize(min_size, max_size),
+        T.ToTensor(255.0),
+        T.Normalize(mean, std)
+    ])

@@ -96,7 +96,7 @@ class FPNFeatureExpander(nn.Module):
     """
 
     def __init__(self, network, outputs, channels, num_filters, use_1x1=True, use_upsample=True,
-                 use_elewadd=True, use_bias=False, use_relu=False, pretrained=False,
+                 use_elewadd=True, use_bias=False, use_relu=False, pretrained=None,
                  norm_layer=None, top_blocks=None):
         super(FPNFeatureExpander, self).__init__()
         self.features = nn.ModuleList(parse_network(network, outputs, pretrained))
