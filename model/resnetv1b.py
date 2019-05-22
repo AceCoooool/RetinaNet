@@ -48,6 +48,55 @@ class BasicBlockV1b(nn.Module):
         return out
 
 
+# This is old bottleneck version: stride on first conv
+class BottleneckV1(nn.Module):
+    """ResNetV1 BottleneckV1b"""
+    expansion = 4
+
+    def __init__(self, in_channel, planes, strides=1, dilation=1,
+                 downsample=None, last_gamma=False, **kwargs):
+        super(BottleneckV1, self).__init__()
+        self.conv1 = nn.Conv2d(in_channel, planes, kernel_size=1, stride=strides, bias=False)
+        self.bn1 = nn.BatchNorm2d(planes)
+        self.relu1 = nn.ReLU(inplace=True)
+        self.conv2 = nn.Conv2d(planes, planes, kernel_size=3, padding=dilation,
+                               dilation=dilation, bias=False)
+        self.bn2 = nn.BatchNorm2d(planes)
+        self.relu2 = nn.ReLU(inplace=True)
+        self.conv3 = nn.Conv2d(planes, planes * 4, kernel_size=1, bias=False)
+        if not last_gamma:
+            self.bn3 = nn.BatchNorm2d(planes * 4)
+        else:
+            self.bn3 = nn.BatchNorm2d(planes * 4)
+            nn.init.zeros_(self.bn3.weight)
+        self.relu3 = nn.ReLU(inplace=True)
+        self.downsample = downsample
+        self.dilation = dilation
+        self.strides = strides
+
+    def forward(self, x):
+        residual = x
+
+        out = self.conv1(x)
+        out = self.bn1(out)
+        out = self.relu1(out)
+
+        out = self.conv2(out)
+        out = self.bn2(out)
+        out = self.relu2(out)
+
+        out = self.conv3(out)
+        out = self.bn3(out)
+
+        if self.downsample is not None:
+            residual = self.downsample(x)
+
+        out = out + residual
+        out = self.relu3(out)
+
+        return out
+
+
 class BottleneckV1b(nn.Module):
     """ResNetV1b BottleneckV1b"""
     expansion = 4
@@ -234,7 +283,7 @@ class ResNetV1b(nn.Module):
 # Constructor
 # -----------------------------------------------------------------------------
 def resnet50_v1b(pretrained=None, **kwargs):
-    model = ResNetV1b(BottleneckV1b, [3, 4, 6, 3], **kwargs)
+    model = ResNetV1b(BottleneckV1, [3, 4, 6, 3], **kwargs)
     if pretrained:
         model.load_state_dict(torch.load(pretrained))
         from data.datasets.imagenet import ImageNetAttr
@@ -246,7 +295,7 @@ def resnet50_v1b(pretrained=None, **kwargs):
 
 
 def resnet101_v1b(pretrained=None, **kwargs):
-    model = ResNetV1b(BottleneckV1b, [3, 4, 23, 3], **kwargs)
+    model = ResNetV1b(BottleneckV1, [3, 4, 23, 3], **kwargs)
     if pretrained:
         import torch
         model.load_state_dict(torch.load(pretrained))
@@ -286,5 +335,5 @@ def resnet50_v1s(pretrained=None, **kwargs):
 
 
 if __name__ == '__main__':
-    net = resnet50_v1b()
+    net = resnet50_v1s()
     print(net)

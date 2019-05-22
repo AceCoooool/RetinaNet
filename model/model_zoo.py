@@ -11,7 +11,7 @@ _models = {
     'resnet50_v1s': resnet50_v1s,
     # RetinaNet
     'retina_resnet50_v1b_coco': retina_resnet50_v1b_coco,
-
+    'retina_resnet50_v1s_coco': retina_resnet50_v1s_coco,
 }
 
 

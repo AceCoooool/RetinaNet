@@ -8,16 +8,13 @@ sys.path.insert(0, os.path.join(cur_path, '..'))
 import utils as ptutil
 from configs import cfg
 from model.model_zoo import get_model
-from data.datasets.coco import COCODataset
-from data.transforms.pre_process_cv import transforms_eval
-from data.collate_batch import BatchCollator
-from data.build import make_data_sampler, make_batch_data_sampler
+from data.build import build_dataloader
 from engine.inference import inference
 
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Eval RetinaNet.')
-    parser.add_argument('--config_file', type=str,
+    parser.add_argument('--config-file', type=str,
                         default='../configs/retina_resnet50_v1b_coco.yaml')
 
     # device
@@ -26,34 +23,6 @@ def parse_args():
 
     args = parser.parse_args()
     return args
-
-
-def get_dataset(name, transforms, root, ann_file):
-    if name.lower() == 'coco':
-        dataset = COCODataset(ann_file, root, False, transforms=transforms)
-    else:
-        raise ValueError('illegal dataset name')
-    return dataset
-
-
-def get_dataloader(cfg, distributed=False):
-    aspect_grouping = [1]
-    transform = transforms_eval(cfg.INPUT.min_size, cfg.INPUT.max_size)
-    root = os.path.join(cfg.DATA.root, 'val2017')
-    ann_file = os.path.join(cfg.DATA.root, 'annotations/instances_val2017.json')
-    dataset = get_dataset(cfg.DATA.dataset, transform, root, ann_file)
-    sampler = make_data_sampler(dataset, False, distributed)
-    batch_sampler = make_batch_data_sampler(
-        dataset, sampler, aspect_grouping, cfg.CONFIG.images_per_gpu, None, 0
-    )
-    collator = BatchCollator(cfg.CONFIG.size_divisibility)
-    data_loader = torch.utils.data.DataLoader(
-        dataset,
-        num_workers=cfg.CONFIG.num_workers,
-        batch_sampler=batch_sampler,
-        collate_fn=collator,
-    )
-    return data_loader
 
 
 if __name__ == '__main__':
@@ -84,7 +53,7 @@ if __name__ == '__main__':
         ptutil.mkdir(output_folder)
 
     # dataset
-    data_loader = get_dataloader(cfg, distributed)
+    data_loader = build_dataloader(cfg, False, distributed)
     inference(
         model,
         data_loader,

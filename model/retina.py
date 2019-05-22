@@ -8,7 +8,7 @@ from model.module import FPNFeatureExpander, LastLevelP6P7
 from model.module import BoxCoder, to_image_list, make_anchor_generator
 from model.module import RetinaNetHead, make_postprocessor, make_loss_evaluator
 
-__all__ = ['get_retina_net', 'retina_resnet50_v1b_coco']
+__all__ = ['get_retina_net', 'retina_resnet50_v1b_coco', 'retina_resnet50_v1s_coco']
 
 
 class RetinaNet(nn.Module):
@@ -91,7 +91,10 @@ def get_retina_net(pretrained=None, **kwargs):
     return net
 
 
-def retina_resnet50_v1b_coco(pretrained=None, pretrained_base=None, **kwargs):
+# TODO: move the config to cfg
+def retina_resnet50_v1b_coco(
+        pretrained=None, pretrained_base=os.path.expanduser('~/.torch/models/resnet50_v1b.pth'), **kwargs
+):
     from data.datasets import COCODataset
     classes = COCODataset.CLASSES
     pretrained_base = None if pretrained is None else pretrained_base
@@ -109,16 +112,29 @@ def retina_resnet50_v1b_coco(pretrained=None, pretrained_base=None, **kwargs):
         loss_gamma=2.0, loss_alpha=0.25, bbox_reg_beta=0.11, bbox_reg_weight=4.0, **kwargs)
 
 
-if __name__ == '__main__':
-    a = ''
-    if a:
-        print('a')
+def retina_resnet50_v1s_coco(
+        pretrained=None, pretrained_base=os.path.expanduser('~/.torch/models/resnet50_v1s.pth'), **kwargs
+):
+    from data.datasets import COCODataset
+    classes = COCODataset.CLASSES
+    pretrained_base = None if pretrained else pretrained_base
+    features = FPNFeatureExpander(
+        network='resnet50_v1s', outputs=[[11, 3], [12, 5], [13, 2]],
+        channels=[512, 1024, 2048], num_filters=[256, 256, 256],
+        use_1x1=True, use_upsample=True, use_elewadd=True, use_bias=True,
+        pretrained=pretrained_base, top_blocks=LastLevelP6P7(2048, 256))
+    return get_retina_net(
+        pretrained=pretrained, features=features,
+        classes=classes, anchor_sizes=(32, 64, 128, 256, 512), aspect_ratios=(0.5, 1.0, 2.0),
+        anchor_strides=(8, 16, 32, 64, 128), straddle_thresh=-1, octave=2.0, scales_per_octave=3,
+        in_channels=256, num_convs=4, prior_prob=0.01, pre_nms_thresh=0.05, pre_nms_top_n=1000,
+        nms_thresh=0.4, fpn_post_nms_top_n=100, fg_iou_threshold=0.5, bg_iou_threshold=0.4,
+        loss_gamma=2.0, loss_alpha=0.25, bbox_reg_beta=0.11, bbox_reg_weight=4.0, **kwargs)
 
-    # net = retina_resnet50_v1b_coco(pretrained=True)
-    # net.eval()
-    # params = net.state_dict()
-    # all_keys = params.keys()
-    # all_keys = [k for k in all_keys if not k.endswith('num_batches_tracked')]
-    # for k in all_keys:
-    #     print(":\"" + k+"\",")
-    # print(len(all_keys))
+
+if __name__ == '__main__':
+    net = retina_resnet50_v1s_coco()
+    net.eval()
+    a = torch.randn(1, 3, 300, 300)
+    with torch.no_grad():
+        out = net(a)

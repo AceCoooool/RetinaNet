@@ -1,5 +1,6 @@
 import random
 import data.transforms.functional_cv as F
+import data.transforms.transforms_cv as T
 
 
 class Compose(object):
@@ -72,4 +73,28 @@ class Normalize(object):
 
     def __call__(self, image, target):
         image = F.normalize(image, mean=self.mean, std=self.std)
+        return image, target
+
+
+class ColorJitter(object):
+    def __init__(self, brightness=None, contrast=None, saturation=None, hue=None):
+        self.color_jitter = T.ColorJitter(
+            brightness=brightness,
+            contrast=contrast,
+            saturation=saturation,
+            hue=hue)
+
+    def __call__(self, image, target):
+        image = self.color_jitter(image)
+        return image, target
+
+
+class RandomHorizontalFlip(object):
+    def __init__(self, prob=0.5):
+        self.prob = prob
+
+    def __call__(self, image, target):
+        if random.random() < self.prob:
+            image = F.hflip(image)
+            target = target.transpose(0)
         return image, target
