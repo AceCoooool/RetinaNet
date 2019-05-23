@@ -2,12 +2,12 @@
 import random
 import numpy as np
 import torch
+from matplotlib import pyplot as plt
 
 from utils.colors import default_color
 
 
 def plot_image(img, ax=None, reverse_rgb=False):
-    from matplotlib import pyplot as plt
     if ax is None:
         # create new axes
         fig = plt.figure()
@@ -23,8 +23,6 @@ def plot_image(img, ax=None, reverse_rgb=False):
 
 def plot_bbox(img, pred, class_names=None, colors=default_color,
               reverse_rgb=False, ax=None):
-    from matplotlib import pyplot as plt
-
     ax = plot_image(img, ax=ax, reverse_rgb=reverse_rgb)
 
     boxes = pred.bbox

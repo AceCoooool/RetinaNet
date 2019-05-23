@@ -155,9 +155,5 @@ if __name__ == '__main__':
     fpn = FPNFeatureExpander('resnet50_v1b', outputs, channels, num_filters, use_1x1=True, use_upsample=True,
                              use_elewadd=True, use_bias=False, use_relu=False, pretrained=False,
                              norm_layer=None, top_blocks=LastLevelP6P7)
-    import torch
 
-    a = torch.randn(1, 3, 224, 224)
-    with torch.no_grad():
-        out = fpn(a)
-    print([a.shape for a in out])
+

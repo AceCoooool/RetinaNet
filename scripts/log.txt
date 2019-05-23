@@ -76,3 +76,447 @@ TRAIN:
 2019-05-23 10:28:05,345 RetinaNet.trainer INFO: eta: 5:38:50  iter: 480  loss: 2.2735 (2.3532)  loss_retina_cls: 1.1462 (1.1467)  loss_retina_reg: 1.1240 (1.2065)  time: 0.1091 (0.1133)  data: 0.0026 (0.0041)  lr: 0.004867  max mem: 3204
 2019-05-23 10:28:07,516 RetinaNet.trainer INFO: eta: 5:38:14  iter: 500  loss: 2.2389 (2.3528)  loss_retina_cls: 1.1397 (1.1464)  loss_retina_reg: 1.0935 (1.2063)  time: 0.1104 (0.1131)  data: 0.0024 (0.0041)  lr: 0.005000  max mem: 3204
 2019-05-23 10:28:09,756 RetinaNet.trainer INFO: eta: 5:38:05  iter: 520  loss: 2.2594 (2.3525)  loss_retina_cls: 1.1395 (1.1463)  loss_retina_reg: 1.1050 (1.2061)  time: 0.1102 (0.1130)  data: 0.0026 (0.0040)  lr: 0.005000  max mem: 3204
+2019-05-23 10:56:10,220 RetinaNet INFO: Using 1 GPUs
+2019-05-23 10:56:10,221 RetinaNet INFO: Namespace(config_file='../configs/retina_resnet50_v1s_coco.yaml', distributed=False, init_method='env://', local_rank=0, skip_test=False)
+2019-05-23 10:56:10,221 RetinaNet INFO: Running with config:
+CONFIG:
+  model: 
+  num_workers: 4
+  output_dir: .
+  save_dir: 
+  size_divisibility: 32
+DATA:
+  dataset: coco
+  root: /home/ace/.torch/datasets/coco
+INPUT:
+  brightness: 0.0
+  contrast: 0.0
+  flip_prob: 0.5
+  hue: 0.0
+  max_size_test: 1333
+  max_size_train: 800
+  min_size_test: 800
+  min_size_train: 400
+  pixel_mean: (0.406, 0.456, 0.485)
+  pixel_std: (0.225, 0.224, 0.229)
+  saturation: 0.0
+  use_255: False
+MODEL:
+  device: cuda
+  model: retina_resnet50_v1s_coco
+TEST:
+  expected_results: []
+  expected_results_sigma_tol: 4
+  img_per_gpu: 8
+  pretrained: /home/ace/.torch/models/retina_resnet50_v1b_coco.pth
+  vis_thresh: 0.5
+TRAIN:
+  backbone: resnet50_v1s
+  base_lr: 0.005
+  bias_lr_factor: 2
+  checkpoint_period: 2500
+  gamma: 0.1
+  img_per_gpu: 2
+  max_iter: 180000
+  model_root: /home/ace/.torch/models
+  momentum: 0.9
+  steps: (120000, 160000)
+  warmup_factor: 0.3333333333333333
+  warmup_iters: 500
+  warmup_method: linear
+  weight: 
+  weight_decay: 0.0001
+  weight_decay_bias: 0
+2019-05-23 11:01:52,160 RetinaNet INFO: Using 1 GPUs
+2019-05-23 11:01:52,161 RetinaNet INFO: Namespace(config_file='../configs/retina_resnet50_v1s_coco.yaml', distributed=False, init_method='env://', local_rank=0, skip_test=False)
+2019-05-23 11:01:52,161 RetinaNet INFO: Running with config:
+CONFIG:
+  model: 
+  num_workers: 4
+  output_dir: .
+  save_dir: 
+  size_divisibility: 32
+DATA:
+  dataset: coco
+  root: /home/ace/.torch/datasets/coco
+INPUT:
+  brightness: 0.0
+  contrast: 0.0
+  flip_prob: 0.5
+  hue: 0.0
+  max_size_test: 1333
+  max_size_train: 1333
+  min_size_test: 800
+  min_size_train: 800
+  pixel_mean: (0.406, 0.456, 0.485)
+  pixel_std: (0.225, 0.224, 0.229)
+  saturation: 0.0
+  use_255: False
+MODEL:
+  device: cuda
+  model: retina_resnet50_v1s_coco
+TEST:
+  expected_results: []
+  expected_results_sigma_tol: 4
+  img_per_gpu: 8
+  pretrained: /home/ace/.torch/models/retina_resnet50_v1b_coco.pth
+  vis_thresh: 0.5
+TRAIN:
+  backbone: resnet50_v1s
+  base_lr: 0.005
+  bias_lr_factor: 2
+  checkpoint_period: 2500
+  gamma: 0.1
+  img_per_gpu: 2
+  max_iter: 180000
+  model_root: /home/ace/.torch/models
+  momentum: 0.9
+  steps: (120000, 160000)
+  warmup_factor: 0.3333333333333333
+  warmup_iters: 500
+  warmup_method: linear
+  weight: 
+  weight_decay: 0.0001
+  weight_decay_bias: 0
+2019-05-23 11:02:44,487 RetinaNet.trainer INFO: Start training
+2019-05-23 11:03:07,061 RetinaNet INFO: Using 1 GPUs
+2019-05-23 11:03:07,061 RetinaNet INFO: Namespace(config_file='../configs/retina_resnet50_v1s_coco.yaml', distributed=False, init_method='env://', local_rank=0, skip_test=False)
+2019-05-23 11:03:07,062 RetinaNet INFO: Running with config:
+CONFIG:
+  model: 
+  num_workers: 4
+  output_dir: .
+  save_dir: 
+  size_divisibility: 32
+DATA:
+  dataset: coco
+  root: /home/ace/.torch/datasets/coco
+INPUT:
+  brightness: 0.0
+  contrast: 0.0
+  flip_prob: 0.5
+  hue: 0.0
+  max_size_test: 1333
+  max_size_train: 1333
+  min_size_test: 800
+  min_size_train: 800
+  pixel_mean: (0.406, 0.456, 0.485)
+  pixel_std: (0.225, 0.224, 0.229)
+  saturation: 0.0
+  use_255: False
+MODEL:
+  device: cuda
+  model: retina_resnet50_v1s_coco
+TEST:
+  expected_results: []
+  expected_results_sigma_tol: 4
+  img_per_gpu: 8
+  pretrained: /home/ace/.torch/models/retina_resnet50_v1b_coco.pth
+  vis_thresh: 0.5
+TRAIN:
+  backbone: resnet50_v1s
+  base_lr: 0.005
+  bias_lr_factor: 2
+  checkpoint_period: 2500
+  gamma: 0.1
+  img_per_gpu: 2
+  max_iter: 180000
+  model_root: /home/ace/.torch/models
+  momentum: 0.9
+  steps: (120000, 160000)
+  warmup_factor: 0.3333333333333333
+  warmup_iters: 500
+  warmup_method: linear
+  weight: 
+  weight_decay: 0.0001
+  weight_decay_bias: 0
+2019-05-23 11:03:33,359 RetinaNet.trainer INFO: Start training
+2019-05-23 11:08:20,613 RetinaNet INFO: Using 1 GPUs
+2019-05-23 11:08:20,613 RetinaNet INFO: Namespace(config_file='../configs/retina_resnet50_v1s_coco.yaml', distributed=False, init_method='env://', local_rank=0, skip_test=False)
+2019-05-23 11:08:20,613 RetinaNet INFO: Running with config:
+CONFIG:
+  model: 
+  num_workers: 4
+  output_dir: .
+  save_dir: 
+  size_divisibility: 32
+DATA:
+  dataset: coco
+  root: /home/ace/.torch/datasets/coco
+INPUT:
+  brightness: 0.0
+  contrast: 0.0
+  flip_prob: 0.5
+  hue: 0.0
+  max_size_test: 1333
+  max_size_train: 800
+  min_size_test: 800
+  min_size_train: 400
+  pixel_mean: (0.406, 0.456, 0.485)
+  pixel_std: (0.225, 0.224, 0.229)
+  saturation: 0.0
+  use_255: False
+MODEL:
+  device: cuda
+  model: retina_resnet50_v1s_coco
+TEST:
+  expected_results: []
+  expected_results_sigma_tol: 4
+  img_per_gpu: 8
+  pretrained: /home/ace/.torch/models/retina_resnet50_v1b_coco.pth
+  vis_thresh: 0.5
+TRAIN:
+  backbone: resnet50_v1s
+  base_lr: 0.005
+  bias_lr_factor: 2
+  checkpoint_period: 2500
+  gamma: 0.1
+  img_per_gpu: 2
+  max_iter: 180000
+  model_root: /home/ace/.torch/models
+  momentum: 0.9
+  steps: (120000, 160000)
+  warmup_factor: 0.3333333333333333
+  warmup_iters: 500
+  warmup_method: linear
+  weight: 
+  weight_decay: 0.0001
+  weight_decay_bias: 0
+2019-05-23 11:08:41,305 RetinaNet.trainer INFO: Start training
+2019-05-23 11:15:46,998 RetinaNet INFO: Using 1 GPUs
+2019-05-23 11:15:46,998 RetinaNet INFO: Namespace(config_file='../configs/retina_resnet50_v1s_coco.yaml', distributed=False, init_method='env://', local_rank=0, skip_test=False)
+2019-05-23 11:15:46,998 RetinaNet INFO: Running with config:
+CONFIG:
+  model: 
+  num_workers: 4
+  output_dir: .
+  save_dir: 
+  size_divisibility: 32
+DATA:
+  dataset: coco
+  root: /home/ace/.torch/datasets/coco
+INPUT:
+  brightness: 0.0
+  contrast: 0.0
+  flip_prob: 0.5
+  hue: 0.0
+  max_size_test: 1333
+  max_size_train: 800
+  min_size_test: 800
+  min_size_train: 400
+  pixel_mean: (0.406, 0.456, 0.485)
+  pixel_std: (0.225, 0.224, 0.229)
+  saturation: 0.0
+  use_255: False
+MODEL:
+  device: cuda
+  model: retina_resnet50_v1s_coco
+TEST:
+  expected_results: []
+  expected_results_sigma_tol: 4
+  img_per_gpu: 8
+  pretrained: /home/ace/.torch/models/retina_resnet50_v1b_coco.pth
+  vis_thresh: 0.5
+TRAIN:
+  backbone: resnet50_v1s
+  base_lr: 0.005
+  bias_lr_factor: 2
+  checkpoint_period: 2500
+  gamma: 0.1
+  img_per_gpu: 2
+  max_iter: 180000
+  model_root: /home/ace/.torch/models
+  momentum: 0.9
+  steps: (120000, 160000)
+  warmup_factor: 0.3333333333333333
+  warmup_iters: 500
+  warmup_method: linear
+  weight: 
+  weight_decay: 0.0001
+  weight_decay_bias: 0
+2019-05-23 11:16:04,041 RetinaNet.trainer INFO: Start training
+2019-05-23 11:17:53,008 RetinaNet INFO: Using 1 GPUs
+2019-05-23 11:17:53,009 RetinaNet INFO: Namespace(config_file='../configs/retina_resnet50_v1s_coco.yaml', distributed=False, init_method='env://', local_rank=0, skip_test=False)
+2019-05-23 11:17:53,009 RetinaNet INFO: Running with config:
+CONFIG:
+  model: 
+  num_workers: 4
+  output_dir: .
+  save_dir: 
+  size_divisibility: 32
+DATA:
+  dataset: coco
+  root: /home/ace/.torch/datasets/coco
+INPUT:
+  brightness: 0.0
+  contrast: 0.0
+  flip_prob: 0.5
+  hue: 0.0
+  max_size_test: 1333
+  max_size_train: 500
+  min_size_test: 800
+  min_size_train: 400
+  pixel_mean: (0.406, 0.456, 0.485)
+  pixel_std: (0.225, 0.224, 0.229)
+  saturation: 0.0
+  use_255: False
+MODEL:
+  device: cuda
+  model: retina_resnet50_v1s_coco
+TEST:
+  expected_results: []
+  expected_results_sigma_tol: 4
+  img_per_gpu: 8
+  pretrained: /home/ace/.torch/models/retina_resnet50_v1b_coco.pth
+  vis_thresh: 0.5
+TRAIN:
+  backbone: resnet50_v1s
+  base_lr: 0.005
+  bias_lr_factor: 2
+  checkpoint_period: 2500
+  gamma: 0.1
+  img_per_gpu: 2
+  max_iter: 180000
+  model_root: /home/ace/.torch/models
+  momentum: 0.9
+  steps: (120000, 160000)
+  warmup_factor: 0.3333333333333333
+  warmup_iters: 500
+  warmup_method: linear
+  weight: 
+  weight_decay: 0.0001
+  weight_decay_bias: 0
+2019-05-23 11:18:13,490 RetinaNet.trainer INFO: Start training
+2019-05-23 11:18:16,225 RetinaNet.trainer INFO: eta: 6:49:38  iter: 20  loss: 2.2781 (2.4207)  loss_retina_cls: 1.1352 (1.1364)  loss_retina_reg: 1.1463 (1.2843)  time: 0.0872 (0.1366)  data: 0.0037 (0.0414)  lr: 0.001800  max mem: 2116
+2019-05-23 11:18:17,998 RetinaNet.trainer INFO: eta: 5:37:45  iter: 40  loss: 2.2468 (2.4010)  loss_retina_cls: 1.1364 (1.1377)  loss_retina_reg: 1.1143 (1.2633)  time: 0.0882 (0.1126)  data: 0.0038 (0.0227)  lr: 0.001933  max mem: 2138
+2019-05-23 11:18:19,791 RetinaNet.trainer INFO: eta: 5:14:45  iter: 60  loss: 2.2466 (2.4241)  loss_retina_cls: 1.1357 (1.1386)  loss_retina_reg: 1.1136 (1.2854)  time: 0.0880 (0.1050)  data: 0.0037 (0.0164)  lr: 0.002067  max mem: 2147
+2019-05-23 11:18:21,577 RetinaNet.trainer INFO: eta: 5:02:58  iter: 80  loss: 2.2734 (2.4050)  loss_retina_cls: 1.1368 (1.1386)  loss_retina_reg: 1.1292 (1.2664)  time: 0.0877 (0.1010)  data: 0.0037 (0.0132)  lr: 0.002200  max mem: 2216
+2019-05-23 11:18:23,333 RetinaNet.trainer INFO: eta: 4:54:59  iter: 100  loss: 2.2385 (2.3912)  loss_retina_cls: 1.1364 (1.1387)  loss_retina_reg: 1.1077 (1.2525)  time: 0.0870 (0.0984)  data: 0.0036 (0.0114)  lr: 0.002333  max mem: 2216
+2019-05-23 11:18:25,144 RetinaNet.trainer INFO: eta: 4:51:02  iter: 120  loss: 2.2400 (2.3947)  loss_retina_cls: 1.1386 (1.1399)  loss_retina_reg: 1.0882 (1.2548)  time: 0.0887 (0.0971)  data: 0.0037 (0.0101)  lr: 0.002467  max mem: 2216
+2019-05-23 11:18:26,979 RetinaNet.trainer INFO: eta: 4:48:43  iter: 140  loss: 2.2250 (2.3964)  loss_retina_cls: 1.1387 (1.1400)  loss_retina_reg: 1.0849 (1.2565)  time: 0.0897 (0.0963)  data: 0.0041 (0.0092)  lr: 0.002600  max mem: 2216
+2019-05-23 11:18:28,788 RetinaNet.trainer INFO: eta: 4:46:29  iter: 160  loss: 2.2318 (2.3938)  loss_retina_cls: 1.1398 (1.1401)  loss_retina_reg: 1.0820 (1.2538)  time: 0.0903 (0.0956)  data: 0.0037 (0.0086)  lr: 0.002733  max mem: 2216
+2019-05-23 11:18:30,620 RetinaNet.trainer INFO: eta: 4:45:08  iter: 180  loss: 2.2404 (2.3909)  loss_retina_cls: 1.1360 (1.1398)  loss_retina_reg: 1.1046 (1.2511)  time: 0.0889 (0.0951)  data: 0.0036 (0.0080)  lr: 0.002867  max mem: 2216
+2019-05-23 11:18:32,395 RetinaNet.trainer INFO: eta: 4:43:11  iter: 200  loss: 2.2437 (2.3833)  loss_retina_cls: 1.1366 (1.1397)  loss_retina_reg: 1.1112 (1.2436)  time: 0.0878 (0.0945)  data: 0.0039 (0.0076)  lr: 0.003000  max mem: 2216
+2019-05-23 11:18:34,188 RetinaNet.trainer INFO: eta: 4:41:50  iter: 220  loss: 2.2572 (2.3840)  loss_retina_cls: 1.1364 (1.1397)  loss_retina_reg: 1.1216 (1.2443)  time: 0.0885 (0.0941)  data: 0.0040 (0.0073)  lr: 0.003133  max mem: 2216
+2019-05-23 11:18:52,407 RetinaNet INFO: Using 1 GPUs
+2019-05-23 11:18:52,407 RetinaNet INFO: Namespace(config_file='../configs/retina_resnet50_v1s_coco.yaml', distributed=False, init_method='env://', local_rank=0, skip_test=False)
+2019-05-23 11:18:52,408 RetinaNet INFO: Running with config:
+CONFIG:
+  model: 
+  num_workers: 4
+  output_dir: .
+  save_dir: 
+  size_divisibility: 32
+DATA:
+  dataset: coco
+  root: /home/ace/.torch/datasets/coco
+INPUT:
+  brightness: 0.0
+  contrast: 0.0
+  flip_prob: 0.5
+  hue: 0.0
+  max_size_test: 1333
+  max_size_train: 500
+  min_size_test: 800
+  min_size_train: 400
+  pixel_mean: (0.406, 0.456, 0.485)
+  pixel_std: (0.225, 0.224, 0.229)
+  saturation: 0.0
+  use_255: False
+MODEL:
+  device: cuda
+  model: retina_resnet50_v1s_coco
+TEST:
+  expected_results: []
+  expected_results_sigma_tol: 4
+  img_per_gpu: 8
+  pretrained: /home/ace/.torch/models/retina_resnet50_v1b_coco.pth
+  vis_thresh: 0.5
+TRAIN:
+  backbone: resnet50_v1s
+  base_lr: 0.005
+  bias_lr_factor: 2
+  checkpoint_period: 2500
+  gamma: 0.1
+  img_per_gpu: 2
+  max_iter: 180000
+  model_root: /home/ace/.torch/models
+  momentum: 0.9
+  steps: (120000, 160000)
+  warmup_factor: 0.3333333333333333
+  warmup_iters: 500
+  warmup_method: linear
+  weight: 
+  weight_decay: 0.0001
+  weight_decay_bias: 0
+2019-05-23 11:19:12,874 RetinaNet.trainer INFO: Start training
+2019-05-23 19:31:16,490 RetinaNet INFO: Using 1 GPUs
+2019-05-23 19:31:16,490 RetinaNet INFO: Namespace(config_file='../configs/retina_resnet50_v1s_coco.yaml', distributed=False, init_method='env://', local_rank=0, skip_test=False)
+2019-05-23 19:31:16,491 RetinaNet INFO: Running with config:
+CONFIG:
+  model: 
+  num_workers: 4
+  output_dir: .
+  save_dir: 
+  size_divisibility: 32
+DATA:
+  dataset: coco
+  root: /home/ace/.torch/datasets/coco
+INPUT:
+  brightness: 0.0
+  contrast: 0.0
+  flip_prob: 0.5
+  hue: 0.0
+  max_size_test: 1333
+  max_size_train: 500
+  min_size_test: 800
+  min_size_train: 400
+  pixel_mean: (0.406, 0.456, 0.485)
+  pixel_std: (0.225, 0.224, 0.229)
+  saturation: 0.0
+  use_255: False
+MODEL:
+  device: cuda
+  model: retina_resnet50_v1s_coco
+TEST:
+  expected_results: []
+  expected_results_sigma_tol: 4
+  img_per_gpu: 8
+  pretrained: /home/ace/.torch/models/retina_resnet50_v1b_coco.pth
+  vis_thresh: 0.5
+TRAIN:
+  backbone: resnet50_v1s
+  base_lr: 0.005
+  bias_lr_factor: 2
+  checkpoint_period: 2500
+  gamma: 0.1
+  img_per_gpu: 2
+  max_iter: 180000
+  model_root: /home/ace/.torch/models
+  momentum: 0.9
+  steps: (120000, 160000)
+  warmup_factor: 0.3333333333333333
+  warmup_iters: 500
+  warmup_method: linear
+  weight: 
+  weight_decay: 0.0001
+  weight_decay_bias: 0
+2019-05-23 19:31:34,687 RetinaNet.trainer INFO: Start training
+2019-05-23 19:31:37,320 RetinaNet.trainer INFO: eta: 6:30:31  iter: 20  loss: 2.2494 (2.3647)  loss_retina_cls: 1.1375 (1.1401)  loss_retina_reg: 1.1118 (1.2246)  time: 0.0876 (0.1302)  data: 0.0024 (0.0351)  lr: 0.001800  max mem: 2121
+2019-05-23 19:31:39,085 RetinaNet.trainer INFO: eta: 5:27:37  iter: 40  loss: 2.3041 (2.3612)  loss_retina_cls: 1.1358 (1.1388)  loss_retina_reg: 1.1699 (1.2224)  time: 0.0876 (0.1092)  data: 0.0026 (0.0188)  lr: 0.001933  max mem: 2207
+2019-05-23 19:31:40,847 RetinaNet.trainer INFO: eta: 5:06:25  iter: 60  loss: 2.2668 (2.3822)  loss_retina_cls: 1.1355 (1.1389)  loss_retina_reg: 1.1226 (1.2434)  time: 0.0878 (0.1022)  data: 0.0026 (0.0134)  lr: 0.002067  max mem: 2207
+2019-05-23 19:31:42,658 RetinaNet.trainer INFO: eta: 4:57:40  iter: 80  loss: 2.3245 (2.3833)  loss_retina_cls: 1.1373 (1.1389)  loss_retina_reg: 1.1848 (1.2444)  time: 0.0895 (0.0993)  data: 0.0024 (0.0107)  lr: 0.002200  max mem: 2207
+2019-05-23 19:31:44,447 RetinaNet.trainer INFO: eta: 4:51:45  iter: 100  loss: 2.2674 (2.3971)  loss_retina_cls: 1.1367 (1.1387)  loss_retina_reg: 1.1285 (1.2583)  time: 0.0874 (0.0973)  data: 0.0024 (0.0090)  lr: 0.002333  max mem: 2208
+2019-05-23 19:31:46,176 RetinaNet.trainer INFO: eta: 4:46:18  iter: 120  loss: 2.2535 (2.3950)  loss_retina_cls: 1.1369 (1.1390)  loss_retina_reg: 1.1209 (1.2560)  time: 0.0859 (0.0955)  data: 0.0025 (0.0080)  lr: 0.002467  max mem: 2208
+2019-05-23 19:31:47,940 RetinaNet.trainer INFO: eta: 4:43:08  iter: 140  loss: 2.2360 (2.3782)  loss_retina_cls: 1.1346 (1.1387)  loss_retina_reg: 1.0919 (1.2395)  time: 0.0870 (0.0945)  data: 0.0024 (0.0072)  lr: 0.002600  max mem: 2209
+2019-05-23 19:31:49,657 RetinaNet.trainer INFO: eta: 4:39:53  iter: 160  loss: 2.2560 (2.3767)  loss_retina_cls: 1.1374 (1.1388)  loss_retina_reg: 1.1239 (1.2379)  time: 0.0850 (0.0934)  data: 0.0025 (0.0066)  lr: 0.002733  max mem: 2209
+2019-05-23 19:31:51,375 RetinaNet.trainer INFO: eta: 4:37:21  iter: 180  loss: 2.2276 (2.3729)  loss_retina_cls: 1.1351 (1.1386)  loss_retina_reg: 1.0955 (1.2343)  time: 0.0851 (0.0925)  data: 0.0023 (0.0061)  lr: 0.002867  max mem: 2209
+2019-05-23 19:31:53,116 RetinaNet.trainer INFO: eta: 4:35:41  iter: 200  loss: 2.2458 (2.3641)  loss_retina_cls: 1.1367 (1.1387)  loss_retina_reg: 1.1110 (1.2254)  time: 0.0861 (0.0920)  data: 0.0024 (0.0057)  lr: 0.003000  max mem: 2209
+2019-05-23 19:31:54,840 RetinaNet.trainer INFO: eta: 4:34:04  iter: 220  loss: 2.2678 (2.3698)  loss_retina_cls: 1.1366 (1.1388)  loss_retina_reg: 1.1315 (1.2310)  time: 0.0853 (0.0915)  data: 0.0023 (0.0054)  lr: 0.003133  max mem: 2209
+2019-05-23 19:31:56,640 RetinaNet.trainer INFO: eta: 4:33:41  iter: 240  loss: 2.2623 (2.3686)  loss_retina_cls: 1.1371 (1.1391)  loss_retina_reg: 1.1149 (1.2295)  time: 0.0883 (0.0913)  data: 0.0024 (0.0052)  lr: 0.003267  max mem: 2209
+2019-05-23 19:31:58,424 RetinaNet.trainer INFO: eta: 4:33:09  iter: 260  loss: 2.2477 (2.3631)  loss_retina_cls: 1.1361 (1.1391)  loss_retina_reg: 1.1097 (1.2240)  time: 0.0872 (0.0912)  data: 0.0025 (0.0050)  lr: 0.003400  max mem: 2209
+2019-05-23 19:32:00,157 RetinaNet.trainer INFO: eta: 4:32:09  iter: 280  loss: 2.2391 (2.3649)  loss_retina_cls: 1.1387 (1.1391)  loss_retina_reg: 1.1068 (1.2258)  time: 0.0865 (0.0909)  data: 0.0023 (0.0048)  lr: 0.003533  max mem: 2209
+2019-05-23 19:32:01,934 RetinaNet.trainer INFO: eta: 4:31:43  iter: 300  loss: 2.2320 (2.3609)  loss_retina_cls: 1.1375 (1.1390)  loss_retina_reg: 1.0954 (1.2219)  time: 0.0874 (0.0907)  data: 0.0024 (0.0046)  lr: 0.003667  max mem: 2209
+2019-05-23 19:32:03,708 RetinaNet.trainer INFO: eta: 4:31:18  iter: 320  loss: 2.2410 (2.3596)  loss_retina_cls: 1.1408 (1.1392)  loss_retina_reg: 1.1018 (1.2204)  time: 0.0862 (0.0906)  data: 0.0023 (0.0045)  lr: 0.003800  max mem: 2209
+2019-05-23 19:32:05,400 RetinaNet.trainer INFO: eta: 4:30:13  iter: 340  loss: 2.2896 (2.3645)  loss_retina_cls: 1.1387 (1.1392)  loss_retina_reg: 1.1497 (1.2254)  time: 0.0862 (0.0902)  data: 0.0023 (0.0044)  lr: 0.003933  max mem: 2209
+2019-05-23 19:32:07,158 RetinaNet.trainer INFO: eta: 4:29:48  iter: 360  loss: 2.2424 (2.3657)  loss_retina_cls: 1.1389 (1.1392)  loss_retina_reg: 1.1034 (1.2265)  time: 0.0876 (0.0901)  data: 0.0023 (0.0043)  lr: 0.004067  max mem: 2209

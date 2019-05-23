@@ -15,7 +15,7 @@ from engine.inference import inference
 def parse_args():
     parser = argparse.ArgumentParser(description='Eval RetinaNet.')
     parser.add_argument('--config-file', type=str,
-                        default='../configs/retina_resnet50_v1b_coco.yaml')
+                        default='../configs/retina_resnet101_v1b_coco.yaml')
 
     # device
     parser.add_argument('--local_rank', type=int, default=0)

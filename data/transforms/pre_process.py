@@ -20,7 +20,7 @@ def load_test(filename, min_image_size=800, mean=(102.9801, 115.9465, 122.7717),
 
 def transforms_eval(cfg):
     return T.Compose([
-        T.Resize(cfg.INPUT.min_size, cfg.INPUT.max_size),
+        T.Resize(cfg.INPUT.min_size_test, cfg.INPUT.max_size_test),
         T.ToTensor(255.0),
         T.Normalize(mean=cfg.INPUT.pixel_mean, std=cfg.INPUT.pixel_std)
     ])

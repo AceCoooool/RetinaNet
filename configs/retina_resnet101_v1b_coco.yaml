@@ -1,0 +1,7 @@
+CONFIG:
+  model: 'retina_resnet101_v1b_coco'
+
+
+TEST:
+  img_per_gpu: 2
+  pretrained: '/home/ace/.torch/models/retina_resnet101_v1b_coco.pth'

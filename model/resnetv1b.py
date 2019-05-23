@@ -139,7 +139,7 @@ class BottleneckV1b(nn.Module):
         if self.downsample is not None:
             residual = self.downsample(x)
 
-        out = out + residual
+        out += residual
         out = self.relu3(out)
 
         return out
@@ -335,5 +335,5 @@ def resnet50_v1s(pretrained=None, **kwargs):
 
 
 if __name__ == '__main__':
-    net = resnet50_v1s()
+    net = resnet101_v1b()
     print(net)

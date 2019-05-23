@@ -17,8 +17,8 @@ from utils.plot_bbox import plot_bbox
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Demo of RetinaNet.')
-    parser.add_argument('--config_file', type=str,
-                        default='../configs/retina_resnet50_v1b_coco.yaml')
+    parser.add_argument('--config-file', type=str,
+                        default='../configs/retina_resnet101_v1b_coco.yaml')
     parser.add_argument('--images', type=str, default=os.path.join(cur_path, '../png/biking.jpg'),
                         help='Test images.')
 

@@ -32,7 +32,7 @@ def parse_args():
 
 
 def train(cfg, local_rank, distributed):
-    pretrained_base = os.path.join(cfg.TRAIN.model_root, cfg.TRAIN.backbone + '.pth')
+    pretrained_base = os.path.join(cfg.TRAIN.model_root, cfg.TRAIN.backbone+'.pth')
     model = get_model(cfg.MODEL.model, pretrained_base=pretrained_base)
     device = torch.device(cfg.MODEL.device)
     model.to(device)
