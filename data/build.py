@@ -56,9 +56,9 @@ def make_batch_data_sampler(dataset, sampler, aspect_grouping, batch_size, num_i
     return batch_sampler
 
 
-def build_dataset(name, transforms, root, ann_file):
+def build_dataset(name, transforms, root, ann_file, remove):
     if name.lower() == 'coco':
-        dataset = COCODataset(ann_file, root, False, transforms=transforms)
+        dataset = COCODataset(ann_file, root, remove, transforms=transforms)
     else:
         raise ValueError('illegal dataset name')
     return dataset
@@ -68,17 +68,19 @@ def build_dataloader(cfg, train=False, distributed=False, start_iter=0):
     aspect_grouping = [1]
     if train:
         transform = transforms_train(cfg)
-        num_iters, shuffle = cfg.SOLVER.max_iter, True
-        img_per_gpu = cfg.SOLVER.img_per_gpu
+        num_iters = cfg.TRAIN.max_iter
+        shuffle, remove = True, True
+        img_per_gpu = cfg.TRAIN.img_per_gpu
         root = os.path.join(cfg.DATA.root, 'train2017')
         ann_file = os.path.join(cfg.DATA.root, 'annotations/instances_train2017.json')
     else:
         transform = transforms_eval(cfg)
-        num_iters, shuffle, start_iter = None, False, 0
+        num_iters, start_iter = None, 0
+        shuffle, remove = False, False
         img_per_gpu = cfg.TEST.img_per_gpu
         root = os.path.join(cfg.DATA.root, 'val2017')
         ann_file = os.path.join(cfg.DATA.root, 'annotations/instances_val2017.json')
-    dataset = build_dataset(cfg.DATA.dataset, transform, root, ann_file)
+    dataset = build_dataset(cfg.DATA.dataset, transform, root, ann_file, remove)
     sampler = make_data_sampler(dataset, shuffle, distributed)
     batch_sampler = make_batch_data_sampler(
         dataset, sampler, aspect_grouping, img_per_gpu, num_iters, start_iter

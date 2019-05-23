@@ -76,7 +76,7 @@ class RetinaNet(nn.Module):
             "loss_retina_cls": loss_box_cls,
             "loss_retina_reg": loss_box_reg,
         }
-        return anchors, losses
+        return losses
 
     def _forward_test(self, anchors, box_cls, box_regression):
         boxes = self.box_selector_test(anchors, box_cls, box_regression)

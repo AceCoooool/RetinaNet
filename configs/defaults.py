@@ -8,6 +8,7 @@ _C = CN()
 # MODEL
 _C.MODEL = CN()
 _C.MODEL.device = 'cuda'
+_C.MODEL.model = ''
 
 # INPUT
 _C.INPUT = CN()
@@ -33,6 +34,25 @@ _C.DATA.root = os.path.expanduser('~/.torch/datasets/coco')
 
 # TRAIN
 _C.TRAIN = CN()
+_C.TRAIN.model_root = os.path.expanduser('~/.torch/models')
+_C.TRAIN.backbone = ''
+
+_C.TRAIN.base_lr = 0.001
+_C.TRAIN.bias_lr_factor = 2
+_C.TRAIN.momentum = 0.9
+_C.TRAIN.weight_decay = 0.0005
+_C.TRAIN.weight_decay_bias = 0
+_C.TRAIN.gamma = 0.1
+_C.TRAIN.warmup_factor = 1.0 / 3
+_C.TRAIN.warmup_iters = 500
+_C.TRAIN.warmup_method = 'linear'
+
+_C.TRAIN.max_iter = 45000
+_C.TRAIN.steps = (30000,)
+_C.TRAIN.weight = ''
+_C.TRAIN.checkpoint_period = 2500
+
+_C.TRAIN.img_per_gpu = 2
 
 # TEST
 _C.TEST = CN()

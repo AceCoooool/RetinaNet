@@ -19,7 +19,7 @@ from engine.inference import inference
 def parse_args():
     parser = argparse.ArgumentParser(description='Eval RetinaNet.')
     parser.add_argument('--config-file', type=str,
-                        default='../configs/retina_resnet50_v1b_coco.yaml')
+                        default='../configs/retina_resnet50_v1s_coco.yaml')
     parser.add_argument("--skip-test", type=ptutil.str2bool, default='false',
                         help='Do not test the final model')
 
@@ -32,8 +32,9 @@ def parse_args():
 
 
 def train(cfg, local_rank, distributed):
-    model = get_model(cfg.TRAIN.model, pretrained_base=cfg.TRAIN.pretrained_base)
-    device = torch.device(cfg.MODEL.DEVICE)
+    pretrained_base = os.path.join(cfg.TRAIN.model_root, cfg.TRAIN.backbone + '.pth')
+    model = get_model(cfg.MODEL.model, pretrained_base=pretrained_base)
+    device = torch.device(cfg.MODEL.device)
     model.to(device)
     if distributed:
         model = torch.nn.SyncBatchNorm.convert_sync_batchnorm(model)
@@ -49,13 +50,13 @@ def train(cfg, local_rank, distributed):
     arguments = {}
     arguments["iteration"] = 0
 
-    output_dir = cfg.OUTPUT_DIR
+    output_dir = cfg.CONFIG.output_dir
 
     save_to_disk = ptutil.get_rank() == 0
     checkpointer = ptutil.CheckPointer(
-        cfg, model, optimizer, scheduler, output_dir, save_to_disk
+        model, optimizer, scheduler, output_dir, save_to_disk
     )
-    extra_checkpoint_data = checkpointer.load(cfg.MODEL.WEIGHT)
+    extra_checkpoint_data = checkpointer.load(cfg.TRAIN.weight)
     arguments.update(extra_checkpoint_data)
 
     data_loader = build_dataloader(
@@ -63,7 +64,7 @@ def train(cfg, local_rank, distributed):
         start_iter=arguments["iteration"],
     )
 
-    checkpoint_period = cfg.SOLVER.CHECKPOINT_PERIOD
+    checkpoint_period = cfg.TRAIN.checkpoint_period
 
     training(model, data_loader, optimizer, scheduler, checkpointer,
              device, checkpoint_period, arguments)

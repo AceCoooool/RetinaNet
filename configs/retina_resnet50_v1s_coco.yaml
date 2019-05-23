@@ -1,15 +1,22 @@
 INPUT:
-  min_size_train: 800
-  max_size_train:
+  min_size_train: 400   # 800
+  max_size_train: 800  # 1333
   use_255: False
   pixel_mean: (0.406, 0.456, 0.485)
   pixel_std: (0.225, 0.224, 0.229)
 
+MODEL:
+  model: 'retina_resnet50_v1s_coco'
+
 
 TRAIN:
-  model: 'retina_resnet50_v1s_coco'
-  pretrained_base: '/home/ace/.torch/models/resnet50_v1s.pth'
-
+  weight: ''
+  backbone: 'resnet50_v1s'
+  base_lr: 0.005
+  weight_decay: 0.0001
+  steps: (120000, 160000)
+  max_iter: 180000
+  img_per_gpu: 2
 
 
 TEST:

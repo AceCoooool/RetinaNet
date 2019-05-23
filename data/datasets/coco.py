@@ -115,8 +115,8 @@ class COCODataset(VisionDataset):
 
 
 if __name__ == '__main__':
-    root = '/home/ace/.torch/datasets/coco/val2017'
-    ann_file = '/home/ace/.torch/datasets/coco/annotations/instances_val2017.json'
-    remove = False
+    root = '/home/ace/.torch/datasets/coco/train2017'
+    ann_file = '/home/ace/.torch/datasets/coco/annotations/instances_train2017.json'
+    remove = True
     datas = COCODataset(ann_file, root, remove)
-    print(datas[0])
+    print(len(datas))

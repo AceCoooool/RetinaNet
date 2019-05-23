@@ -8,23 +8,23 @@ def make_optimizer(cfg, model):
     for key, value in model.named_parameters():
         if not value.requires_grad:
             continue
-        lr = cfg.SOLVER.BASE_LR
-        weight_decay = cfg.SOLVER.WEIGHT_DECAY
+        lr = cfg.TRAIN.base_lr
+        weight_decay = cfg.TRAIN.weight_decay
         if "bias" in key:
-            lr = cfg.SOLVER.BASE_LR * cfg.SOLVER.BIAS_LR_FACTOR
-            weight_decay = cfg.SOLVER.WEIGHT_DECAY_BIAS
+            lr = cfg.TRAIN.base_lr * cfg.TRAIN.bias_lr_factor
+            weight_decay = cfg.TRAIN.weight_decay_bias
         params += [{"params": [value], "lr": lr, "weight_decay": weight_decay}]
 
-    optimizer = torch.optim.SGD(params, lr, momentum=cfg.SOLVER.MOMENTUM)
+    optimizer = torch.optim.SGD(params, lr, momentum=cfg.TRAIN.momentum)
     return optimizer
 
 
 def make_lr_scheduler(cfg, optimizer):
     return WarmupMultiStepLR(
         optimizer,
-        cfg.SOLVER.STEPS,
-        cfg.SOLVER.GAMMA,
-        warmup_factor=cfg.SOLVER.WARMUP_FACTOR,
-        warmup_iters=cfg.SOLVER.WARMUP_ITERS,
-        warmup_method=cfg.SOLVER.WARMUP_METHOD,
+        cfg.TRAIN.steps,
+        cfg.TRAIN.gamma,
+        warmup_factor=cfg.TRAIN.warmup_factor,
+        warmup_iters=cfg.TRAIN.warmup_iters,
+        warmup_method=cfg.TRAIN.warmup_method,
     )

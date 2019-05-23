@@ -4,10 +4,9 @@ file
 """
 
 import torch
-
-from model.ops import cat_boxlist, concat_box_prediction_layers
 from model.module import Matcher
 from model.module import smooth_l1_loss, SigmoidFocalLoss
+from model.ops import cat_boxlist, concat_box_prediction_layers, boxlist_iou
 
 
 class RetinaNetLossComputation(object):
@@ -69,6 +68,55 @@ class RetinaNetLossComputation(object):
         ) / (pos_inds.numel() + N)
 
         return retinanet_cls_loss, retinanet_regression_loss
+
+    def prepare_targets(self, anchors, targets):
+        labels = []
+        regression_targets = []
+        for anchors_per_image, targets_per_image in zip(anchors, targets):
+            matched_targets = self.match_targets_to_anchors(
+                anchors_per_image, targets_per_image, self.copied_fields
+            )
+
+            matched_idxs = matched_targets.get_field("matched_idxs")
+            labels_per_image = self.generate_labels_func(matched_targets)
+            labels_per_image = labels_per_image.to(dtype=torch.float32)
+
+            # Background (negative examples)
+            bg_indices = matched_idxs == Matcher.BELOW_LOW_THRESHOLD
+            labels_per_image[bg_indices] = 0
+
+            # discard anchors that go out of the boundaries of the image
+            if "not_visibility" in self.discard_cases:
+                labels_per_image[~anchors_per_image.get_field("visibility")] = -1
+
+            # discard indices that are between thresholds
+            if "between_thresholds" in self.discard_cases:
+                inds_to_discard = matched_idxs == Matcher.BETWEEN_THRESHOLDS
+                labels_per_image[inds_to_discard] = -1
+
+            # compute regression targets
+            regression_targets_per_image = self.box_coder.encode(
+                matched_targets.bbox, anchors_per_image.bbox
+            )
+
+            labels.append(labels_per_image)
+            regression_targets.append(regression_targets_per_image)
+
+        return labels, regression_targets
+
+    def match_targets_to_anchors(self, anchor, target, copied_fields=[]):
+        match_quality_matrix = boxlist_iou(target, anchor)
+        matched_idxs = self.proposal_matcher(match_quality_matrix)
+        # RPN doesn't need any fields from target
+        # for creating the labels, so clear them all
+        target = target.copy_with_fields(copied_fields)
+        # get the targets corresponding GT for each anchor
+        # NB: need to clamp the indices because we can have a single
+        # GT in the image, and matched_idxs can be -2, which goes
+        # out of bounds
+        matched_targets = target[matched_idxs.clamp(min=0)]
+        matched_targets.add_field("matched_idxs", matched_idxs)
+        return matched_targets
 
 
 def generate_labels(matched_targets):
