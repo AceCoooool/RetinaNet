@@ -1,7 +1,7 @@
 # RetinaNet
 Implementation of RetinaNet (this is converted from [maskrcnn-benchmark](https://github.com/facebookresearch/maskrcnn-benchmark))
 
-<p align="center"><img width="80%" src="png/demo_out.png" /></p>
+<p align="center"><img width="80%" src="png/demo.png" /></p>
 
 ## Environment
 
@@ -45,4 +45,4 @@ $ python -m torch.distributed.launch --nproc_per_node=$NGPUS train.py [--config-
 ## TODO
 
 - [ ] Add freeze backbone
-- [ ] 
+- [ ] Add training results
